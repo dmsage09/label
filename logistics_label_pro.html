@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Logistics Label Generator</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:20px;
+}
+
+/* PRINT SIZE */
+
+@page{
+size:100mm 50mm;
+margin:0;
+}
+
+/* LABEL */
+
+.container{
+width:100mm;
+height:50mm;
+border:2px solid #1a3f7a;
+border-radius:8px;
+padding:4mm;
+position:relative;
+box-sizing:border-box;
+overflow:hidden;
+}
+
+/* WATERMARK */
+
+.watermark{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:18mm;
+color:#1a73c9;
+opacity:0.05;
+font-weight:bold;
+white-space:nowrap;
+pointer-events:none;
+}
+
+/* TOP RIGHT ARROW */
+
+.arrowbox{
+position:absolute;
+top:3mm;
+right:3mm;
+text-align:center;
+}
+
+.arrow{
+font-size:7mm;
+line-height:6mm;
+}
+
+.thisside{
+font-size:2.5mm;
+font-weight:bold;
+}
+
+/* TEXT */
+
+.company-title{
+font-size:4mm;
+font-weight:bold;
+}
+
+.awb{
+font-size:5mm;
+font-weight:bold;
+margin-top:2mm;
+margin-bottom:1mm;
+}
+
+.field{
+font-size:3mm;
+font-weight:bold;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+}
+
+.transport{
+font-size:3mm;
+margin-top:3mm;
+}
+
+/* INPUT */
+
+input{
+padding:4px;
+margin:3px;
+}
+
+button{
+margin-top:10px;
+padding:6px 12px;
+cursor:pointer;
+}
+
+/* PRINT MODE */
+
+@media print{
+
+body{
+padding:0;
+}
+
+button,input,h2{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Logistics Label Generator</h2>
+
+<!-- INPUT SECTION -->
+
+<div>
+
+<input id="company" placeholder="Company Name"><br>
+
+<input id="awb" placeholder="AWB">
+<input id="pkg" placeholder="PKG"><br>
+
+<input id="party" placeholder="Party Name"><br>
+
+<input id="po" placeholder="PO">
+<input id="inv" placeholder="INV"><br>
+
+<input id="from" placeholder="FROM">
+<input id="to" placeholder="TO"><br>
+
+<button onclick="generate()">Generate Label</button>
+
+</div>
+
+<br>
+
+<!-- LABEL -->
+
+<div class="container">
+
+<div class="watermark" id="watermark">COMPANY</div>
+
+<div class="arrowbox">
+<div class="arrow">↑</div>
+<div class="thisside">THIS SIDE UP</div>
+</div>
+
+<div class="company-title" id="company_title">COMPANY</div>
+
+<div class="awb">AWB: <span id="awb_val"></span></div>
+
+<div class="field">PARTY: <span id="party_val"></span></div>
+
+<div class="row">
+<div class="field">PO: <span id="po_val"></span></div>
+<div class="field">INV: <span id="inv_val"></span></div>
+</div>
+
+<div class="row">
+<div class="field">FROM: <span id="from_val"></span></div>
+<div class="field">TO: <span id="to_val"></span></div>
+</div>
+
+<div class="row">
+<div class="field">PKG: <span id="pkg_val"></span></div>
+
+<div class="transport">
+☐ Train ☐ Air ☐ Road
+</div>
+
+</div>
+
+</div>
+
+<button onclick="window.print()">Print Label</button>
+
+<script>
+
+function generate(){
+
+let company=document.getElementById("company").value
+
+document.getElementById("company_title").innerText=company
+document.getElementById("watermark").innerText=company
+
+document.getElementById("awb_val").innerText=document.getElementById("awb").value
+document.getElementById("party_val").innerText=document.getElementById("party").value
+document.getElementById("po_val").innerText=document.getElementById("po").value
+document.getElementById("inv_val").innerText=document.getElementById("inv").value
+document.getElementById("from_val").innerText=document.getElementById("from").value
+document.getElementById("to_val").innerText=document.getElementById("to").value
+document.getElementById("pkg_val").innerText=document.getElementById("pkg").value
+
+}
+
+</script>
+
+</body>
+</html>
